@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github, Globe2 } from 'lucide-react';
+import { Github, Globe2, Check } from 'lucide-react';
 
 const containerVariants = {
   initial: { opacity: 0, y: 12 },
@@ -119,41 +119,6 @@ function SkillGalaxy() {
   );
 }
 
-function ProjectsCarousel() {
-  const projects = [
-    { name: 'Nova UI', desc: 'Design system', url: '#'},
-    { name: 'Flux App', desc: 'Realtime dashboard', url: '#'},
-    { name: 'Orbit ML', desc: 'AI features', url: '#'},
-  ];
-  return (
-    <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 grid place-items-center p-6">
-      <div className="[perspective:1000px] w-full max-w-3xl mx-auto">
-        <div className="relative h-56">
-          {/* Simulated 3D by rotating cards */}
-          <div className="absolute inset-0 flex items-center justify-center gap-6">
-            {projects.map((p, idx) => (
-              <motion.div
-                key={p.name}
-                className="w-56 h-36 rounded-2xl border border-white/10 bg-white/10 backdrop-blur p-4 text-white shadow-lg"
-                style={{ transform: `rotateY(${(idx-1)*-20}deg) translateZ(${(idx===1?160:80)}px)` }}
-                animate={{ rotateY: [(idx-1)*-20, (idx-1)*-20 - 360] }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              >
-                <div className="text-lg font-semibold">{p.name}</div>
-                <div className="text-slate-300 text-sm">{p.desc}</div>
-                <div className="mt-3 flex gap-2 text-xs text-indigo-300">
-                  <a href={p.url} className="inline-flex items-center gap-1"><Github className="w-3.5 h-3.5"/>Code</a>
-                  <a href={p.url} className="inline-flex items-center gap-1"><Globe2 className="w-3.5 h-3.5"/>Live</a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function CodeToProduct() {
   return (
     <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-tr from-indigo-950 via-slate-950 to-fuchsia-950 p-6 grid md:grid-cols-2 gap-6">
@@ -218,49 +183,6 @@ function PolaroidWall() {
   );
 }
 
-function ResumeGlobe() {
-  const pins = [
-    { name: 'NYC', role: 'Intern', year: '2021', x: '60%', y: '40%' },
-    { name: 'Berlin', role: 'Engineer', year: '2022', x: '48%', y: '36%' },
-    { name: 'Tokyo', role: 'Research', year: '2023', x: '70%', y: '42%' },
-  ];
-  return (
-    <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 grid place-items-center">
-      <div className="relative w-64 h-64 rounded-full bg-[radial-gradient(circle_at_30%_30%,#93c5fd_0%,#1e293b_35%,#0f172a_60%,#020617_100%)] border border-white/10 shadow-inner overflow-hidden">
-        <div className="absolute inset-0 rounded-full border border-white/10 animate-[spin_40s_linear_infinite]" />
-        {pins.map((p) => (
-          <motion.div key={p.name} className="absolute" style={{ left: p.x, top: p.y }} whileHover={{ scale: 1.1 }}>
-            <div className="w-2 h-2 rounded-full bg-fuchsia-300 shadow-[0_0_12px_2px_rgba(217,70,239,.5)]" />
-            <div className="mt-1 px-2 py-1 rounded bg-black/60 border border-white/10 backdrop-blur text-[10px] text-white">
-              {p.name} · {p.role} · {p.year}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Heatmap() {
-  const days = 7 * 12; // 12 weeks
-  return (
-    <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 p-6">
-      <div className="grid grid-cols-12 gap-1">
-        {Array.from({ length: days }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: i * 0.015 }}
-            title={`Day ${i + 1}`}
-            className="w-4 h-4 rounded-sm bg-indigo-900/40 hover:bg-indigo-500/70 border border-white/5"
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function SplitReveal() {
   return (
     <div className="relative h-full w-full rounded-3xl overflow-hidden border border-white/10 bg-white/5">
@@ -288,13 +210,13 @@ function PersonalityCards() {
   return (
     <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 p-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {cards.map((c, i) => (
+        {cards.map((c) => (
           <motion.div
             key={c.title}
             whileHover={{ rotateY: 180 }}
-            className="[transform-style:preserve-3d] h-28 rounded-2xl border border-white/10 bg-white/5 p-3"
+            className="relative [transform-style:preserve-3d] h-28 rounded-2xl border border-white/10 bg-white/5 p-3"
           >
-            <div className="absolute inset-0 grid place-items-center backface-hidden"> 
+            <div className="absolute inset-0 grid place-items-center backface-hidden">
               <div className="text-2xl">{c.emoji}</div>
               <div className="text-white text-sm mt-1">{c.title}</div>
             </div>
@@ -302,6 +224,75 @@ function PersonalityCards() {
               <div className="text-slate-200 text-sm">{c.info}</div>
             </div>
           </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FeaturesGrid() {
+  const features = [
+    { title: 'Fast', desc: 'Optimized performance' },
+    { title: 'Responsive', desc: 'Looks great on any device' },
+    { title: 'Accessible', desc: 'Built with a11y in mind' },
+    { title: 'Theming', desc: 'Easy to customize' },
+    { title: 'Animations', desc: 'Fluid motion by default' },
+    { title: 'Secure', desc: 'Best practices baked in' },
+  ];
+  return (
+    <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map((f) => (
+          <div key={f.title} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="flex items-center gap-2 text-white"><Check className="w-4 h-4 text-indigo-300"/>{f.title}</div>
+            <div className="text-slate-300 text-sm mt-1">{f.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PricingTable() {
+  const tiers = [
+    { name: 'Starter', price: '$0', features: ['1 project', 'Community support'] },
+    { name: 'Pro', price: '$12', features: ['Unlimited', 'Priority support'], highlight: true },
+    { name: 'Team', price: '$29', features: ['Team seats', 'SLA'] },
+  ];
+  return (
+    <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 p-6 grid place-items-center">
+      <div className="grid md:grid-cols-3 gap-4 w-full max-w-5xl">
+        {tiers.map((t) => (
+          <div key={t.name} className={`rounded-2xl border p-5 ${t.highlight ? 'border-indigo-400/50 bg-indigo-400/10 shadow-[0_0_0_1px_rgba(99,102,241,.2)]' : 'border-white/10 bg-white/5'}`}>
+            <div className="text-white text-lg font-medium">{t.name}</div>
+            <div className="text-3xl font-semibold text-white mt-2">{t.price}<span className="text-sm text-slate-300 font-normal">/mo</span></div>
+            <ul className="mt-4 space-y-2 text-sm text-slate-300">
+              {t.features.map((f) => (
+                <li key={f} className="flex items-center gap-2"><Check className="w-4 h-4 text-indigo-300"/>{f}</li>
+              ))}
+            </ul>
+            <button className={`mt-5 w-full py-2 rounded-lg border ${t.highlight ? 'bg-indigo-500/20 border-indigo-400/60 text-white' : 'bg-white/5 border-white/10 text-slate-200'} hover:bg-white/10`}>Get started</button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FAQAccordion() {
+  const faqs = [
+    { q: 'How does this work?', a: 'Pick a prompt; the right panel renders a live section demo with smooth motion.' },
+    { q: 'Can I customize it?', a: 'Yes — styles and content are easily adjustable to fit your brand.' },
+    { q: 'Is it responsive?', a: 'Absolutely. Everything is built with mobile-first responsive design.' },
+  ];
+  return (
+    <div className="h-full w-full rounded-3xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+      <div className="max-w-2xl mx-auto space-y-3">
+        {faqs.map((item, idx) => (
+          <details key={idx} className="group rounded-xl border border-white/10 bg-white/5 p-4">
+            <summary className="cursor-pointer list-none text-white font-medium">{item.q}</summary>
+            <p className="mt-2 text-slate-300 text-sm">{item.a}</p>
+          </details>
         ))}
       </div>
     </div>
@@ -324,13 +315,13 @@ export default function SectionRenderer({ current, regenKey }) {
           {current === 'tech-orbit' && <TechOrbit />}
           {current === 'timeline' && <Timeline />}
           {current === 'galaxy' && <SkillGalaxy />}
-          {current === 'carousel' && <ProjectsCarousel />}
           {current === 'code-to-product' && <CodeToProduct />}
           {current === 'polaroid' && <PolaroidWall />}
-          {current === 'globe' && <ResumeGlobe />}
-          {current === 'heatmap' && <Heatmap />}
           {current === 'split-reveal' && <SplitReveal />}
           {current === 'personality' && <PersonalityCards />}
+          {current === 'features' && <FeaturesGrid />}
+          {current === 'pricing' && <PricingTable />}
+          {current === 'faq' && <FAQAccordion />}
         </motion.div>
       </AnimatePresence>
     </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function PreviewCard({ title, variant }) {
-  // Small hover preview visuals per variant (simplified, lightweight)
   const renderPreview = () => {
     switch (variant) {
       case 'tech-orbit':
@@ -34,10 +33,26 @@ export default function PreviewCard({ title, variant }) {
             </div>
           </div>
         );
-      default:
+      case 'features':
         return (
-          <div className="w-full h-full rounded-xl bg-white/5" />
+          <div className="grid grid-cols-3 gap-1 p-2">
+            {[0,1,2].map(i => <div key={i} className="h-8 rounded bg-white/10" />)}
+          </div>
         );
+      case 'pricing':
+        return (
+          <div className="grid grid-cols-3 gap-1 p-2">
+            {[0,1,2].map(i => <div key={i} className="h-10 rounded bg-gradient-to-br from-indigo-500/20 to-fuchsia-500/20 border border-white/10" />)}
+          </div>
+        );
+      case 'faq':
+        return (
+          <div className="p-2 space-y-1">
+            {[0,1,2].map(i => <div key={i} className="h-4 rounded bg-white/10" />)}
+          </div>
+        );
+      default:
+        return <div className="w-full h-full rounded-xl bg-white/5" />;
     }
   };
 

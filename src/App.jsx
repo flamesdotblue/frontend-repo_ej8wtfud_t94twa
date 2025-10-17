@@ -28,13 +28,6 @@ export default function App() {
       variant: 'galaxy',
     },
     {
-      id: 'carousel',
-      title: 'Project Showcase Carousel',
-      description:
-        '3D carousel of project cards that rotate and expand to show details, stack, GitHub and live buttons.',
-      variant: 'carousel',
-    },
-    {
       id: 'code-to-product',
       title: 'Code-to-Product Animation',
       description:
@@ -47,20 +40,6 @@ export default function App() {
       description:
         'Floating polaroid-style testimonials with names, photos, and soft motion or drag interactions.',
       variant: 'polaroid',
-    },
-    {
-      id: 'globe',
-      title: 'Interactive Resume Globe',
-      description:
-        'Minimal 3D-like globe with pins for places you worked or studied. Hover to see role and year.',
-      variant: 'globe',
-    },
-    {
-      id: 'heatmap',
-      title: 'Contribution Heatmap',
-      description:
-        'Daily learning or coding streak grid with progressive animation and tooltips.',
-      variant: 'heatmap',
     },
     {
       id: 'split-reveal',
@@ -76,6 +55,27 @@ export default function App() {
         'Interactive flip cards that show fun facts, favorite tools, and highlights with subtle 3D motion.',
       variant: 'personality',
     },
+    {
+      id: 'features',
+      title: 'Feature Highlights Grid',
+      description:
+        'Clean grid of core features with icons, short copy, and soft hover accents.',
+      variant: 'features',
+    },
+    {
+      id: 'pricing',
+      title: 'Pricing Plans',
+      description:
+        'Three-column pricing with an emphasized middle card, badges, and gentle glow.',
+      variant: 'pricing',
+    },
+    {
+      id: 'faq',
+      title: 'FAQ Accordion',
+      description:
+        'Common questions in an elegant accordion with smooth reveal.',
+      variant: 'faq',
+    },
   ], []);
 
   const [current, setCurrent] = useState(prompts[0].id);
@@ -83,7 +83,6 @@ export default function App() {
 
   const handleRegenerate = (id) => {
     setCurrent(id);
-    // Trigger a visual re-render key to simulate AI regeneration
     setRegenKey((k) => k + 1);
   };
 
@@ -93,7 +92,6 @@ export default function App() {
         <Hero />
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Left: Prompts */}
           <div className="md:col-span-5 lg:col-span-4 rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-4">
             <div className="flex items-center justify-between mb-3">
               <div className="text-sm font-medium text-slate-200">Prompts</div>
@@ -107,7 +105,6 @@ export default function App() {
             />
           </div>
 
-          {/* Right: Rendered section */}
           <div className="md:col-span-7 lg:col-span-8 h-[70vh] rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-3">
             <motion.div
               initial={{ opacity: 0 }}

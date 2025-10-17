@@ -7,12 +7,11 @@ export default function Hero() {
     <section className="relative w-full h-[40vh] md:h-[48vh] rounded-2xl overflow-hidden border border-white/10 bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950">
       <div className="absolute inset-0">
         <Spline
-          scene="https://prod.spline.design/4cHQr84zOGAHOehh/scene.splinecode"
+          scene="https://prod.spline.design/VJLoxp84lCdVfdZu/scene.splinecode"
           style={{ width: '100%', height: '100%' }}
         />
       </div>
 
-      {/* Soft gradient overlay for readability */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
 
       <div className="relative z-10 h-full flex items-end md:items-center">
